@@ -3,10 +3,8 @@ import Router from 'vue-router'
 import Store from '@/store'
 import {
   Dashboard,
-  Notification,
-  MeshNetwork,
-  // Loading,
-  Settings
+  SVG,
+  TemplatePage
 } from '@/pages'
 
 Vue.use(Router)
@@ -27,15 +25,15 @@ export const routeData = [{
   component: Dashboard
 }, {
   meta: {
-    icon: '',
-    image: 'mesh.png',
-    imageActive: 'mesh-active.png',
-    showOnBottomNav: true,
+    icon: 'settings',
+    image: '',
+    imageActive: '',
+    showOnBottomNav: false,
     showBottomNav: true
   },
-  name: 'mesh network',
-  path: '/mesh_network',
-  component: MeshNetwork
+  name: 'SVG',
+  path: '/svg',
+  component: SVG
 }, {
   meta: {
     icon: 'settings',
@@ -44,20 +42,9 @@ export const routeData = [{
     showOnBottomNav: false,
     showBottomNav: true
   },
-  name: 'settings',
-  path: '/settings',
-  component: Settings
-}, {
-  meta: {
-    icon: 'mdi-bell',
-    image: '',
-    imageActive: '',
-    showOnBottomNav: true,
-    showBottomNav: true
-  },
-  name: 'notification',
-  path: '/notification',
-  component: Notification
+  name: 'tempate_page',
+  path: '/tempate_page',
+  component: TemplatePage
 }]
 
 const router = new Router({

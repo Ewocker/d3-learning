@@ -9,29 +9,6 @@
                      :mini-variant="Mini"
                      :width="$vuetify.breakpoint.xsOnly ? 250 : 300"
                      mobile-break-point="1000">
-  <v-toolbar flat
-             height="60">
-    <v-list dense>
-      <v-list-tile>
-        <v-list-tile-avatar style="cursor: pointer">
-          <v-icon large
-                  @click="() => { $vuetify.breakpoint.smAndUp ? mutToggleMini() : '' }"
-                  class="white--text">account_circle</v-icon>
-        </v-list-tile-avatar>
-        <v-list-tile-content>
-          <v-list-tile-title>
-            {{ 'User First Name' | capitalizeAll }}
-          </v-list-tile-title>
-        </v-list-tile-content>
-        <v-list-tile-action v-if="$vuetify.breakpoint.smAndUp">
-          <v-btn icon
-                 @click.stop="mutToggleMini">
-            <v-icon>chevron_left</v-icon>
-          </v-btn>
-        </v-list-tile-action>
-      </v-list-tile>
-    </v-list>
-  </v-toolbar>
   <v-divider></v-divider>
   <v-list dense>
     <v-list-tile router

@@ -25,7 +25,7 @@ export default {
   props: {},
   data() {
     return {
-      scrollOffScreen: true,
+      scrollOffScreen: false,
       scrollThreshold: 100
     }
   },

@@ -1,15 +1,11 @@
 import Dashboard from './Dashboard'
 
 // To be Implemented
-import Settings from './Settings'
-import Notification from './Notification'
-import MeshNetwork from './MeshNetwork'
-import Loading from './Loading'
+import TemplatePage from './TemplatePage'
+import SVG from './SVG'
 
 export {
   Dashboard,
-  Settings,
-  Notification,
-  MeshNetwork,
-  Loading
+  TemplatePage,
+  SVG
 }

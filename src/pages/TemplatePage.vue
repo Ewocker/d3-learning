@@ -4,8 +4,8 @@
   <v-flex xs12
           text-xs-center
           display-3
-          pt-5>
-    Notification
+          pt-1>
+    Settings
   </v-flex>
 </v-layout>
 </template>
