@@ -4,6 +4,7 @@ import Store from '@/store'
 import {
   Dashboard,
   SVG,
+  D3Select,
   TemplatePage
 } from '@/pages'
 
@@ -34,6 +35,17 @@ export const routeData = [{
   name: 'SVG',
   path: '/svg',
   component: SVG
+}, {
+  meta: {
+    icon: 'settings',
+    image: '',
+    imageActive: '',
+    showOnBottomNav: false,
+    showBottomNav: true
+  },
+  name: 'D3 Select',
+  path: '/d3_select',
+  component: D3Select
 }, {
   meta: {
     icon: 'settings',
