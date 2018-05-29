@@ -16,14 +16,14 @@
       Click on Rect to change color
       <svg width="300"
            height="100"
-           id="example-1-container"
+           id="ex-1-container"
            class="blue-grey lighten-4">
-        <rect v-for="i in 3" :id="`example-1-${i}`"
+        <rect v-for="i in 3" :id="`ex-1-${i}`"
               :x="40 * i"
               y="30"
               width="20"
               height="20"
-              @click="select1(i)" />
+              @click="select(1, i)" />
       </svg>
       <v-btn @click="appendCircle">
         Add Circle
@@ -36,20 +36,18 @@
       <v-card-title class="title">
         Example 2 (SelectAll/attr function):
       </v-card-title>
-      <svg width="300"
-           height="100"
-           id="example-2-container"
-           class="blue-grey lighten-4">
-        <rect v-for="i in 3" :id="`example-1-${i}`"
-              :x="40 * i"
-              y="30"
-              width="20"
-              height="20"
-              @click="" />
-      </svg>
-      <v-btn @click="appendCircle">
-        Add Circle
-      </v-btn>
+      <div id="ex-2-area"></div>
+      <span v-if="ex2step == 0">
+        <v-btn @click="AddSVG(); ex2step = ex2step + 1">
+          Add Svg tag
+        </v-btn>
+      </span>
+      <span v-if="ex2step == 1">
+        See console for logs
+        <v-btn @click="AddCircle(); ex2step = ex2step + 1">
+          Add multiple circle
+        </v-btn>
+      </span>
     </v-card>
   </v-flex>
 </v-layout>
@@ -62,24 +60,49 @@ import colors from 'vuetify/es5/util/colors'
 export default {
   data() {
     return {
-      example_1_selected: [],
-      color: colors.indigo.base
+      ex_1_selected: [],
+      color: colors.indigo.base,
+      ex2step: 0,
+      ex2data: [25, 20, 10, 12, 15]
     }
   },
   methods: {
-    select1(i) {
-      d3.select(`#example-1-${i}`)
+    select(ex, i) {
+      d3.select(`#ex-${ex}-${i}`)
         .attr('fill', this.color)
     },
     appendCircle() {
-      d3.select('#example-1-container')
+      d3.select('#ex-1-container')
         .append('circle')
         .attr('cx', 170)
         .attr('cy', 40)
         .attr('r', 10)
         .attr('fill', this.color)
     },
-    example2() {}
+    AddSVG() {
+      d3.select('#ex-2-area')
+        .append('svg')
+        .attr('width', '90%')
+        .attr('height', 100)
+        .attr('class', 'blue-grey lighten-4')
+        .attr('id', 'ex-2-container')
+    },
+    AddCircle() {
+      d3.select('#ex-2-container')
+        .selectAll('circle')
+        .data(this.ex2data)
+        .enter()
+        .append('circle')
+        .attr('cx', (data, index) => {
+          console.log(`Data: ${data}, Index: ${index}`)
+          return index * 85 + 100
+        })
+        .attr('cy', 40)
+        .attr('r', d => d)
+        .attr('id', (d, i) => `ex-2-${i}`)
+        .attr('fill', 'black')
+        .on('click', (d, i) => this.select(2, i))
+    }
   },
   mounted() {}
 }
