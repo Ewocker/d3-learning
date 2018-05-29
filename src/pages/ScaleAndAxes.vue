@@ -47,58 +47,35 @@
                 wrap>
         <v-flex xs9>
           <v-slider :max="400"
-                    v-model="exBar1Height"
+                    v-model="exBarHeight"
                     type="number"
                     label="Height"></v-slider>
         </v-flex>
         <v-flex xs3>
-          <v-text-field v-model="exBar1Height"
+          <v-text-field v-model="exBarHeight"
                         type="number"></v-text-field>
         </v-flex>
         <v-flex xs9>
           <v-slider :max="320"
-                    v-model="exBar1Width"
+                    v-model="exBarWidth"
                     type="number"
                     label="Width"></v-slider>
         </v-flex>
         <v-flex xs3>
-          <v-text-field v-model="exBar1Width"
+          <v-text-field v-model="exBarWidth"
                         type="number"></v-text-field>
+        </v-flex>
+        <v-flex xs12
+                sm6>
+          Without ScaleLinear <br>
+          <div id="ex-bar1-area"></div>
+        </v-flex>
+        <v-flex xs12
+                sm6>
+          With ScaleLinear <br>
+          <div id="ex-bar2-area"></div>
         </v-flex>
       </v-layout>
-      <div id="ex-bar1-area"></div>
-    </v-card>
-  </v-flex>
-  <v-flex xs12
-          text-xs-center>
-    <v-card class="orange lighten-5 elevation-10 ma-3 hide-overflow pa-3">
-      <v-card-title class="title">
-        Simple Bar Chart with scaleLinear
-      </v-card-title>
-      <v-layout row
-                wrap>
-        <v-flex xs9>
-          <v-slider :max="500"
-                    v-model="exBar2Height"
-                    type="number"
-                    label="Height"></v-slider>
-        </v-flex>
-        <v-flex xs3>
-          <v-text-field v-model="exBar2Height"
-                        type="number"></v-text-field>
-        </v-flex>
-        <v-flex xs9>
-          <v-slider :max="320"
-                    v-model="exBar2Width"
-                    type="number"
-                    label="Width"></v-slider>
-        </v-flex>
-        <v-flex xs3>
-          <v-text-field v-model="exBar2Width"
-                        type="number"></v-text-field>
-        </v-flex>
-      </v-layout>
-      <div id="ex-bar2-area"></div>
     </v-card>
   </v-flex>
 </v-layout>
@@ -117,10 +94,8 @@ export default {
       scaleLinear: null,
       ex1domain: [0, 1000],
       ex1range: [0, 500],
-      exBar1Height: 200,
-      exBar1Width: 200,
-      exBar2Height: 200,
-      exBar2Width: 200
+      exBarHeight: 200,
+      exBarWidth: 200
     }
   },
   created() {
@@ -133,32 +108,28 @@ export default {
     this.exBar2()
   },
   watch: {
-    exBar1Width() {
-      const svg = d3.select('#ex-bar1-container')
-      svg.attr('width', this.exBar1Width)
-    },
-    exBar1Height() {
-      const svg = d3.select('#ex-bar1-container')
-      svg.attr('height', this.exBar1Height)
-    },
-    exBar2Width() {
+    exBarWidth() {
+      const svg1 = d3.select('#ex-bar1-container')
+      svg1.attr('width', this.exBarWidth)
       const svg = d3.select('#ex-bar2-container')
       const box = svg.node().getBoundingClientRect()
       const x = d3.scaleLinear()
         .domain([0, 320])
         .range([0, box.width])
-      svg.attr('width', this.exBar2Width)
+      svg.attr('width', this.exBarWidth)
       svg.selectAll('rect')
         .attr('width', x(40))
         .attr('x', (d, i) => x(i * 60 + 20))
     },
-    exBar2Height() {
+    exBarHeight() {
+      const svg1 = d3.select('#ex-bar1-container')
+      svg1.attr('height', this.exBarHeight)
       const svg = d3.select('#ex-bar2-container')
       const box = svg.node().getBoundingClientRect()
       const y = d3.scaleLinear()
-        .domain([0, 400])
+        .domain([0, 450])
         .range([0, box.height])
-      svg.attr('height', this.exBar2Height)
+      svg.attr('height', this.exBarHeight)
       svg.selectAll('rect')
         .attr('height', (d, i) => y(d.height))
     }
@@ -167,8 +138,8 @@ export default {
     exBar1() {
       const svg = d3.select('#ex-bar1-area')
         .append('svg')
-        .attr('width', this.exBar1Width)
-        .attr('height', this.exBar1Height)
+        .attr('width', this.exBarWidth)
+        .attr('height', this.exBarHeight)
         .attr('class', 'blue-grey lighten-4')
         .attr('id', 'ex-bar1-container')
       svg.selectAll('rect')
@@ -185,8 +156,8 @@ export default {
     exBar2() {
       const svg = d3.select('#ex-bar2-area')
         .append('svg')
-        .attr('width', this.exBar1Width)
-        .attr('height', this.exBar1Height)
+        .attr('width', this.exBarWidth)
+        .attr('height', this.exBarHeight)
         .attr('class', 'blue-grey lighten-4')
         .attr('id', 'ex-bar2-container')
       const box = svg.node().getBoundingClientRect()
