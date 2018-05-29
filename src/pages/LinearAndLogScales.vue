@@ -5,7 +5,7 @@
           text-xs-center
           display-3
           pt-1>
-    Scale & Axes
+    Linear & Log Scales
   </v-flex>
   <v-flex xs6
           text-xs-center>

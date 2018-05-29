@@ -5,7 +5,8 @@ import {
   Dashboard,
   SVG,
   D3Select,
-  ScaleAndAxes,
+  LinearAndLogScales,
+  TimeScales,
   TemplatePage
 } from '@/pages'
 
@@ -55,9 +56,20 @@ export const routeData = [{
     showOnBottomNav: false,
     showBottomNav: true
   },
-  name: 'Scale And Axes',
-  path: '/scale_and_axes',
-  component: ScaleAndAxes
+  name: 'Linear And Log Scales',
+  path: '/linear_and_log_scales',
+  component: LinearAndLogScales
+}, {
+  meta: {
+    icon: 'settings',
+    image: '',
+    imageActive: '',
+    showOnBottomNav: false,
+    showBottomNav: true
+  },
+  name: 'Time Scales',
+  path: '/time_scales',
+  component: TimeScales
 }, {
   meta: {
     icon: 'settings',

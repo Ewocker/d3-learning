@@ -4,12 +4,14 @@ import Dashboard from './Dashboard'
 import TemplatePage from './TemplatePage'
 import SVG from './SVG'
 import D3Select from './D3Select'
-import ScaleAndAxes from './ScaleAndAxes'
+import LinearAndLogScales from './LinearAndLogScales'
+import TimeScales from './TimeScales'
 
 export {
   Dashboard,
   TemplatePage,
   SVG,
   D3Select,
-  ScaleAndAxes
+  LinearAndLogScales,
+  TimeScales
 }
