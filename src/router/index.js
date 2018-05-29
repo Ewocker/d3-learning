@@ -7,7 +7,8 @@ import {
   D3Select,
   LinearAndLogScales,
   TimeScales,
-  TemplatePage
+  TemplatePage,
+  OrdinalScales
 } from '@/pages'
 
 Vue.use(Router)
@@ -70,6 +71,17 @@ export const routeData = [{
   name: 'Time Scales',
   path: '/time_scales',
   component: TimeScales
+}, {
+  meta: {
+    icon: 'settings',
+    image: '',
+    imageActive: '',
+    showOnBottomNav: false,
+    showBottomNav: true
+  },
+  name: 'Ordinal Scales',
+  path: '/ordinal_scales',
+  component: OrdinalScales
 }, {
   meta: {
     icon: 'settings',

@@ -6,6 +6,7 @@ import SVG from './SVG'
 import D3Select from './D3Select'
 import LinearAndLogScales from './LinearAndLogScales'
 import TimeScales from './TimeScales'
+import OrdinalScales from './OrdinalScales'
 
 export {
   Dashboard,
@@ -13,5 +14,6 @@ export {
   SVG,
   D3Select,
   LinearAndLogScales,
-  TimeScales
+  TimeScales,
+  OrdinalScales
 }
