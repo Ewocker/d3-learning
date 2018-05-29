@@ -5,6 +5,7 @@ import {
   Dashboard,
   SVG,
   D3Select,
+  ScaleAndAxes,
   TemplatePage
 } from '@/pages'
 
@@ -46,6 +47,17 @@ export const routeData = [{
   name: 'D3 Select',
   path: '/d3_select',
   component: D3Select
+}, {
+  meta: {
+    icon: 'settings',
+    image: '',
+    imageActive: '',
+    showOnBottomNav: false,
+    showBottomNav: true
+  },
+  name: 'Scale And Axes',
+  path: '/scale_and_axes',
+  component: ScaleAndAxes
 }, {
   meta: {
     icon: 'settings',
