@@ -7,6 +7,7 @@ import D3Select from './D3Select'
 import LinearAndLogScales from './LinearAndLogScales'
 import TimeScales from './TimeScales'
 import OrdinalScales from './OrdinalScales'
+import Gallery from './Gallery'
 
 export {
   Dashboard,
@@ -15,5 +16,6 @@ export {
   D3Select,
   LinearAndLogScales,
   TimeScales,
-  OrdinalScales
+  OrdinalScales,
+  Gallery
 }

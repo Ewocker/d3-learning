@@ -8,8 +8,14 @@ import {
   LinearAndLogScales,
   TimeScales,
   TemplatePage,
-  OrdinalScales
+  OrdinalScales,
+  Gallery
 } from '@/pages'
+
+import {
+  OMGParticles,
+  GalleryTemplatePage
+} from '@/components/gallerys'
 
 Vue.use(Router)
 
@@ -90,8 +96,42 @@ export const routeData = [{
     showOnBottomNav: false,
     showBottomNav: true
   },
-  name: 'tempate_page',
-  path: '/tempate_page',
+  name: 'gallery',
+  path: '/gallery',
+  component: Gallery,
+  children: [{
+    meta: {
+      icon: 'settings',
+      image: '',
+      imageActive: '',
+      showOnBottomNav: false,
+      showBottomNav: true
+    },
+    name: 'gallery1',
+    path: 'gallery1',
+    component: OMGParticles
+  }, {
+    meta: {
+      icon: 'settings',
+      image: '',
+      imageActive: '',
+      showOnBottomNav: false,
+      showBottomNav: true
+    },
+    name: 'gallery2',
+    path: 'gallery2',
+    component: GalleryTemplatePage
+  }]
+}, {
+  meta: {
+    icon: 'settings',
+    image: '',
+    imageActive: '',
+    showOnBottomNav: false,
+    showBottomNav: true
+  },
+  name: 'template_page',
+  path: '/template_page',
   component: TemplatePage
 }]
 
