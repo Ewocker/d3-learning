@@ -3,8 +3,7 @@
           wrap>
   <v-flex xs12
           text-xs-center
-          display-3
-          pt-1>
+          title>
     Gallery Template
   </v-flex>
 </v-layout>

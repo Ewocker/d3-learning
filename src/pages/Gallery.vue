@@ -6,7 +6,7 @@
           display-3
           pt-1>
     Gallery
-    <v-card class="red lighten-5">
+    <v-card class="white elevation-10 pa-2 mt-4">
       <router-view/>
     </v-card>
   </v-flex>

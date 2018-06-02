@@ -107,7 +107,7 @@ export const routeData = [{
       showOnBottomNav: false,
       showBottomNav: true
     },
-    name: 'gallery1',
+    name: 'OMG Particles',
     path: 'gallery1',
     component: OMGParticles
   }, {
