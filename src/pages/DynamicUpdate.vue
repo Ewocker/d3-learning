@@ -47,7 +47,7 @@ export default {
       svg: null,
       chartGroup: null,
       interval: null,
-      dataType: 'height'
+      dataType: 'weight'
     }
   },
   mounted() {
@@ -113,53 +113,15 @@ export default {
       // ======================================
 
       // Update
-      // this.interval = d3.interval(() => {
-      //   this.updateChart()
-      // }, 2000)
-      // this.updateChart()
-      // Update x Axis
-      const xAxisCall = d3.axisBottom(this.x)
-      this.xAxis
-        .call(xAxisCall)
-        .selectAll('text')
-        .attr('x', 0)
-        .attr('y', 10)
-        .attr('transform', 'rotate(-20)')
-        .attr('text-anchor', 'end')
-
-      const yAxisCall = d3.axisLeft(this.y)
-        .ticks(6)
-        .tickFormat(d => (this.dataType === 'height') ? d + 'm' : d + 'kg')
-      this.yAxis
-        .call(yAxisCall)
-
-      this.maxYValue = parseInt(d3.max(this.data.map((d) => d[this.dataType])))
-      console.log(this.maxYValue)
-
-      // Update Domain
-      this.x.domain(this.data.map(d => d.name))
-      this.y.domain([this.maxYValue, 0])
-
-      const rect = this.chartGroup.selectAll('rect')
-        .data(this.data)
-
-      rect.enter()
-        .append('rect')
-        .attr('x', (d, i) => this.x(d.name))
-        .attr('y', d => this.y(d[this.dataType]))
-        .attr('width', this.x.bandwidth)
-        .attr('height', (d, i) => {
-          console.log(i, d.name, d[this.dataType] - this.y(d[this.dataType]))
-          return d[this.dataType] - this.y(d[this.dataType])
-        })
-        .attr('id', (d, i) => `ex-bar1-${i}`)
-        .attr('fill', colors.indigo.base)
+      this.interval = d3.interval(() => {
+        this.updateChart()
+      }, 2000)
+      this.updateChart()
     },
     updateChart() {
       // console.log('updateChart')
-      // this.dataType = (this.dataType === 'height') ? 'weight' : 'height'
+      this.dataType = (this.dataType === 'height') ? 'weight' : 'height'
       this.maxYValue = parseInt(d3.max(this.data.map((d) => d[this.dataType])))
-      console.log(this.maxYValue)
 
       // Update Domain
       this.x.domain(this.data.map(d => d.name))
@@ -185,32 +147,30 @@ export default {
         .text(this.capitalize(this.dataType))
 
       /* JOIN - join new data with old element */
-      const rect = this.chartGroup.selectAll('rect')
+      const rects = this.chartGroup.selectAll('rect')
         .data(this.data)
 
-      /* EXIT old element not present in dew data */
-      rect.exit().remove()
-
       /* UPDATE old element present in new data */
-      rect.attr('x', (d, i) => this.x(d.name))
+      rects
+        .attr('x', (d, i) => this.x(d.name))
         .attr('y', d => this.y(d[this.dataType]))
         .attr('width', this.x.bandwidth)
-        .attr('height', d => d[this.dataType] - this.y(d[this.dataType]))
-        .attr('id', (d, i) => `ex-bar1-${i}`)
+        .attr('height', d => this.y(0) - this.y(d[this.dataType]))
+        .attr('id', (d, i) => `bar1-${i}`)
         .attr('fill', colors.indigo.base)
 
       /* ENTER new element present in new data */
-      rect.enter()
+      rects.enter()
         .append('rect')
         .attr('x', (d, i) => this.x(d.name))
         .attr('y', d => this.y(d[this.dataType]))
         .attr('width', this.x.bandwidth)
-        .attr('height', (d, i) => {
-          console.log(i, d.name, d[this.dataType] - this.y(d[this.dataType]))
-          return d[this.dataType] - this.y(d[this.dataType])
-        })
-        .attr('id', (d, i) => `ex-bar1-${i}`)
+        .attr('height', (d, i) => this.y(0) - this.y(d[this.dataType]))
+        .attr('id', (d, i) => `bar1-${i}`)
         .attr('fill', colors.indigo.base)
+
+      /* EXIT old element not present in dew data */
+      rects.exit().remove()
     },
     capitalize(s) {
       return s.charAt(0).toUpperCase() + s.slice(1)
