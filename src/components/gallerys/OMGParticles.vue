@@ -14,36 +14,44 @@
 <script>
 import * as d3 from 'd3'
 import colors from 'vuetify/es5/util/colors'
+// import _ from 'lodash'
 
 export default {
   data() {
     return {
       color: colors.indigo.base,
-      svg1: null
+      svg1: null,
+      scaleOrdinalChromatic: d3.scaleOrdinal(d3.schemeSet3),
+      colorCount: 0
     }
   },
   mounted() {
-    this.initSvg()
+    this.initSvg1()
   },
   methods: {
-    initSvg() {
+    initSvg1() {
       const particle = this.particle
+
       this.svg1 = d3.select('#area-1')
         .append('svg')
         .attr('width', '100%')
         .attr('height', '400')
         .attr('id', 'svg-1')
-        .on('ontouchstart' in document ? 'touchmove' : 'mousemove', function () { particle(this) })
+        .attr('class', 'indigo lighten-5')
+        .on('mousemove', function () { particle(d3.mouse(this)) })
+      // .on('mousemove', _.throttle(function () {
+      //   try { particle(d3.mouse(this)) } catch (err) {}
+      // }, 100))
     },
-    particle(target) {
-      const m = d3.mouse(target) // Get mouse position [x, y]
+    particle(m) {
       this.svg1
         .insert('circle')
+        .attr('fill', 'none')
         .attr('cx', m[0])
         .attr('cy', m[1])
         .attr('r', 1e-6) // 0.000001
-        .style('stroke', (d, i) => d3.hsl((i = (i + 1) % 360), 1, 0.5))
-        .style('stroke', 'red')
+        .style('stroke', this.scaleOrdinalChromatic(this.colorCount++))
+        .style('stroke-width', 2.5)
         .style('stroke-opacity', 1)
         .transition()
         .duration(2000)
@@ -58,10 +66,4 @@ export default {
 </script>
 
 <style lang="sass">
-rect
-  pointer-events: all
-
-circle
-  fill: none
-  stroke-width: 2.5px
 </style>
