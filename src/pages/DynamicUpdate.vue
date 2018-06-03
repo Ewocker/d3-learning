@@ -47,7 +47,8 @@ export default {
       svg: null,
       chartGroup: null,
       interval: null,
-      dataType: 'weight'
+      dataType: 'weight',
+      tran: d3.transition().duration(1500).ease(Math.sqrt)
     }
   },
   mounted() {
@@ -86,11 +87,13 @@ export default {
 
       /* ================ Axis ================ */
       // Create X Axis
-      this.xAxis = this.chartGroup.append('g')
+      this.xAxis = this.chartGroup
+        .append('g')
         .attr('class', 'x-axis')
         .attr('transform', `translate(0, ${this.height})`)
       // Add chart description
-      this.xLabel = this.chartGroup.append('text')
+      this.xLabel = this.chartGroup
+        .append('text')
         .attr('class', 'x-axis-label')
         .attr('x', this.width / 2)
         .attr('y', this.height + 100)
@@ -99,10 +102,12 @@ export default {
         .text('About Your Body')
 
       // Create Y Axis
-      this.yAxis = this.chartGroup.append('g')
+      this.yAxis = this.chartGroup
+        .append('g')
         .attr('class', 'y-axis')
       // Add chart description
-      this.yLabel = this.chartGroup.append('text')
+      this.yLabel = this.chartGroup
+        .append('text')
         .attr('class', 'y-axis-label')
         .attr('x', -(this.height / 2))
         .attr('y', -60)
@@ -130,6 +135,7 @@ export default {
       // Update x Axis
       const xAxisCall = d3.axisBottom(this.x)
       this.xAxis
+        .transition(this.tran)
         .call(xAxisCall)
         .selectAll('text')
         .attr('x', 0)
@@ -142,16 +148,18 @@ export default {
         .ticks(6)
         .tickFormat(d => (this.dataType === 'height') ? d + 'm' : d + 'kg')
       this.yAxis
+        .transition(this.tran)
         .call(yAxisCall)
       this.yLabel
         .text(this.capitalize(this.dataType))
 
       /* JOIN - join new data with old element */
-      const rects = this.chartGroup.selectAll('rect')
+      const rects = this.chartGroup
+        .selectAll('rect')
         .data(this.data)
 
       /* UPDATE old element present in new data */
-      rects
+      rects.transition(this.tran)
         .attr('x', (d, i) => this.x(d.name))
         .attr('y', d => this.y(d[this.dataType]))
         .attr('width', this.x.bandwidth)
