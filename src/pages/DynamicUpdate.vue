@@ -126,10 +126,11 @@ export default {
     updateChart() {
       // console.log('updateChart')
       this.dataType = (this.dataType === 'height') ? 'weight' : 'height'
+      const data = (this.dataType === 'height') ? this.data : this.data.slice(1)
       this.maxYValue = parseInt(d3.max(this.data.map((d) => d[this.dataType])))
 
       // Update Domain
-      this.x.domain(this.data.map(d => d.name))
+      this.x.domain(data.map(d => d.name))
       this.y.domain([this.maxYValue, 0])
 
       // Update x Axis
@@ -156,7 +157,7 @@ export default {
       /* JOIN - join new data with old element */
       const rects = this.chartGroup
         .selectAll('rect')
-        .data(this.data)
+        .data(data, d => d.name)
 
       /* UPDATE old element present in new data */
       rects.transition(this.tran)
@@ -165,20 +166,29 @@ export default {
         .attr('width', this.x.bandwidth)
         .attr('height', d => this.y(0) - this.y(d[this.dataType]))
         .attr('id', (d, i) => `bar1-${i}`)
-        .attr('fill', colors.indigo.base)
+        .attr('fill', this.dataType === 'height' ? colors.red.base : colors.indigo.base)
 
       /* ENTER new element present in new data */
       rects.enter()
         .append('rect')
         .attr('x', (d, i) => this.x(d.name))
-        .attr('y', d => this.y(d[this.dataType]))
+        .attr('y', d => this.y(0))
         .attr('width', this.x.bandwidth)
-        .attr('height', (d, i) => this.y(0) - this.y(d[this.dataType]))
+        .attr('height', (d, i) => 0)
         .attr('id', (d, i) => `bar1-${i}`)
-        .attr('fill', colors.indigo.base)
+        .attr('fill', this.dataType === 'height' ? colors.indigo.base : colors.red.base)
+        .transition(this.tran)
+        .attr('fill', this.dataType === 'height' ? colors.red.base : colors.indigo.base)
+        .attr('y', d => this.y(d[this.dataType]))
+        .attr('height', (d, i) => this.y(0) - this.y(d[this.dataType]))
 
       /* EXIT old element not present in dew data */
-      rects.exit().remove()
+      rects.exit()
+        .attr('fill', colors.pink.base)
+        .transition(this.tran)
+        .attr('y', this.y(0))
+        .attr('height', 0)
+        .remove()
     },
     capitalize(s) {
       return s.charAt(0).toUpperCase() + s.slice(1)
