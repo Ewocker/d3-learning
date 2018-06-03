@@ -9,6 +9,8 @@ import {
   TimeScales,
   TemplatePage,
   OrdinalScales,
+  MarginAndAxes,
+  DynamicUpdate,
   Gallery
 } from '@/pages'
 
@@ -88,6 +90,28 @@ export const routeData = [{
   name: 'Ordinal Scales',
   path: '/ordinal_scales',
   component: OrdinalScales
+}, {
+  meta: {
+    icon: 'settings',
+    image: '',
+    imageActive: '',
+    showOnBottomNav: false,
+    showBottomNav: true
+  },
+  name: 'Margin && Axes',
+  path: '/margin_axes',
+  component: MarginAndAxes
+}, {
+  meta: {
+    icon: 'settings',
+    image: '',
+    imageActive: '',
+    showOnBottomNav: false,
+    showBottomNav: true
+  },
+  name: 'Dynamic Update',
+  path: '/dynamic_update',
+  component: DynamicUpdate
 }, {
   meta: {
     icon: 'settings',

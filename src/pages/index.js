@@ -8,6 +8,8 @@ import LinearAndLogScales from './LinearAndLogScales'
 import TimeScales from './TimeScales'
 import OrdinalScales from './OrdinalScales'
 import Gallery from './Gallery'
+import MarginAndAxes from './MarginAndAxes'
+import DynamicUpdate from './DynamicUpdate'
 
 export {
   Dashboard,
@@ -17,5 +19,7 @@ export {
   LinearAndLogScales,
   TimeScales,
   OrdinalScales,
+  DynamicUpdate,
+  MarginAndAxes,
   Gallery
 }
