@@ -10,6 +10,7 @@ import OrdinalScales from './OrdinalScales'
 import Gallery from './Gallery'
 import MarginAndAxes from './MarginAndAxes'
 import DynamicUpdate from './DynamicUpdate'
+import ScatterPlot from './ScatterPlot'
 
 export {
   Dashboard,
@@ -21,5 +22,6 @@ export {
   OrdinalScales,
   DynamicUpdate,
   MarginAndAxes,
-  Gallery
+  Gallery,
+  ScatterPlot
 }

@@ -11,7 +11,8 @@ import {
   OrdinalScales,
   MarginAndAxes,
   DynamicUpdate,
-  Gallery
+  Gallery,
+  ScatterPlot
 } from '@/pages'
 
 import {
@@ -112,6 +113,17 @@ export const routeData = [{
   name: 'Dynamic Update',
   path: '/dynamic_update',
   component: DynamicUpdate
+}, {
+  meta: {
+    icon: 'settings',
+    image: '',
+    imageActive: '',
+    showOnBottomNav: false,
+    showBottomNav: true
+  },
+  name: 'scatter Plot',
+  path: '/scatter_plot',
+  component: ScatterPlot
 }, {
   meta: {
     icon: 'settings',
