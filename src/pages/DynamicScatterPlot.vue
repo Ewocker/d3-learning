@@ -5,7 +5,7 @@
           text-xs-center
           display-3
           pt-1>
-    Dynamic Scatter Plot
+    Dynamic Scatter Plot with Legend
     <v-layout row
               wrap>
       <v-flex xs12>
@@ -42,6 +42,7 @@ export default {
       timeLabel: null,
       yAxis: null,
       yLabel: null,
+      legendGroup: null,
       height: 0,
       width: 0,
       svg: null,
@@ -153,6 +154,30 @@ export default {
         .attr('text-anchor', 'middle')
         .text('1800')
       // ======================================
+
+      /* ================ Legend ================ */
+      const continents = ['asia', 'europe', 'america', 'africa']
+      this.legendGroup = this.chartGroup
+        .append('g')
+        .attr('transform', `translate(${this.width - 70}, ${this.height - 120})`)
+        // .append('text')
+        // .text('123')
+      for (let i = 0; i < continents.length; i++) {
+        const g = this.legendGroup
+          .append('g')
+          .attr('transform', `translate(0, ${i * 20})`)
+
+        g.append('rect')
+          .attr('height', 10)
+          .attr('width', 10)
+          .attr('fill', this.continentColor(continents[i]))
+
+        g.append('text')
+          .attr('x', 12)
+          .attr('y', 10)
+          .text(continents[i])
+      }
+      // ========================================
 
       this.d3interval = d3.interval(() => {
         this.yearCount = this.yearCount === this.data.length - 1 ? 0 : this.yearCount + 1
