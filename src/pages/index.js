@@ -11,6 +11,7 @@ import Gallery from './Gallery'
 import MarginAndAxes from './MarginAndAxes'
 import DynamicUpdate from './DynamicUpdate'
 import ScatterPlot from './ScatterPlot'
+import DynamicScatterPlot from './DynamicScatterPlot'
 
 export {
   Dashboard,
@@ -23,5 +24,6 @@ export {
   DynamicUpdate,
   MarginAndAxes,
   Gallery,
-  ScatterPlot
+  ScatterPlot,
+  DynamicScatterPlot
 }

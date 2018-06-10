@@ -12,7 +12,8 @@ import {
   MarginAndAxes,
   DynamicUpdate,
   Gallery,
-  ScatterPlot
+  ScatterPlot,
+  DynamicScatterPlot
 } from '@/pages'
 
 import {
@@ -121,9 +122,20 @@ export const routeData = [{
     showOnBottomNav: false,
     showBottomNav: true
   },
-  name: 'scatter Plot',
+  name: 'Scatter Plot',
   path: '/scatter_plot',
   component: ScatterPlot
+}, {
+  meta: {
+    icon: 'settings',
+    image: '',
+    imageActive: '',
+    showOnBottomNav: false,
+    showBottomNav: true
+  },
+  name: 'Dynamic Scatter Plot',
+  path: '/dynamic_scatter_plot',
+  component: DynamicScatterPlot
 }, {
   meta: {
     icon: 'settings',
